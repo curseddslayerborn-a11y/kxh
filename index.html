@@ -1,1 +1,244 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Game Topup Store</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins;}
+body{
+  background: linear-gradient(rgba(10,0,40,0.85),rgba(10,0,40,0.9)),
+  url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e');
+  background-size:cover;
+  background-position:center;
+  background-attachment:fixed;
+  color:white;
+  min-height:100vh;
+}
+header{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:20px;
+}
+header img{
+  width:50px;
+  height:50px;
+  border-radius:12px;
+}
+.container{padding:20px;}
+h2{margin:20px 0 15px;}
+.game-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:15px;
+}
+.game-card{
+  background:rgba(255,255,255,0.1);
+  backdrop-filter:blur(8px);
+  padding:15px;
+  border-radius:15px;
+  text-align:center;
+  cursor:pointer;
+  transition:.3s;
+}
+.game-card img{
+  width:50px;
+  margin-bottom:8px;
+}
+.game-card:hover{
+  background:rgba(255,255,255,0.2);
+  transform:translateY(-4px);
+}
+.white-card{
+  background:white;
+  color:#222;
+  padding:15px;
+  border-radius:15px;
+  margin-top:20px;
+}
+input{
+  width:100%;
+  padding:12px;
+  border-radius:10px;
+  border:1px solid #ddd;
+  margin-bottom:10px;
+}
+.nominal-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+.nominal-card{
+  background:#f5f5f5;
+  padding:12px;
+  border-radius:12px;
+  cursor:pointer;
+  transition:.3s;
+}
+.nominal-card:hover{background:#e9e9e9;}
+.nominal-card.active{
+  border:2px solid #4b00ff;
+}
+.price{
+  font-weight:600;
+  margin-top:6px;
+  color:#4b00ff;
+}
+button{
+  width:100%;
+  padding:13px;
+  border:none;
+  border-radius:12px;
+  background:#4b00ff;
+  color:white;
+  font-weight:600;
+  margin-top:15px;
+  cursor:pointer;
+}
+button:hover{background:#3200b3;}
+.section{display:none;}
+.section.active{display:block;}
+</style>
+</head>
+<body>
+
+<script>
+const STORE_NAME="KXH Store";
+const WHATSAPP_NUMBER="62882005188877";
+const EMAIL_STORE="muhsanillah@store.com";
+const LOGO_STORE="https://via.placeholder.com/60";
+</script>
+
+<header>
+<img id="logoStore">
+<div>
+<h1 id="storeName"></h1>
+<p id="emailStore"></p>
+</div>
+</header>
+
+<div class="container">
+
+<h2>Pilih Game</h2>
+
+<div class="game-grid">
+<div class="game-card" onclick="pilihGame('ml')">
+<img src="https://upload.wikimedia.org/wikipedia/en/4/4e/Mobile_Legends_Bang_Bang_logo.png">
+Mobile Legends
+</div>
+
+<div class="game-card" onclick="pilihGame('ff')">
+<img src="https://upload.wikimedia.org/wikipedia/en/0/0f/Garena_Free_Fire_logo.png">
+Free Fire
+</div>
+
+<div class="game-card" onclick="pilihGame('ffmax')">
+<img src="https://seeklogo.com/images/F/free-fire-max-logo-1A2A7C7F66-seeklogo.com.png">
+Free Fire MAX
+</div>
+
+<div class="game-card" onclick="pilihGame('blood')">
+<img src="https://via.placeholder.com/50">
+Blood Strike
+</div>
+</div>
+
+<div class="white-card">
+<input type="text" id="gameId" placeholder="Masukkan ID Game">
+<input type="text" id="zoneId" placeholder="Zone ID (khusus ML)">
+</div>
+
+<!-- ML -->
+<div id="ml" class="section white-card">
+<h2>Mobile Legends</h2>
+<div class="nominal-grid">
+<div class="nominal-card" onclick="pilihNominal(this)">85 Diamond<div class="price">Rp 26.000</div></div>
+<div class="nominal-card" onclick="pilihNominal(this)">170 Diamond<div class="price">Rp 50.000</div></div>
+<div class="nominal-card" onclick="pilihNominal(this)">240 Diamond<div class="price">Rp 74.000</div></div>
+<div class="nominal-card" onclick="pilihNominal(this)">568 Diamond<div class="price">Rp 170.000</div></div>
+</div>
+</div>
+
+<!-- FF -->
+<div id="ff" class="section white-card">
+<h2>Free Fire</h2>
+<div class="nominal-grid">
+<div class="nominal-card" onclick="pilihNominal(this)">50 Diamond<div class="price">Rp 10.000</div></div>
+<div class="nominal-card" onclick="pilihNominal(this)">70 Diamond<div class="price">Rp 13.000</div></div>
+<div class="nominal-card" onclick="pilihNominal(this)">140 Diamond<div class="price">Rp 22.000</div></div>
+<div class="nominal-card" onclick="pilihNominal(this)">355 Diamond<div class="price">Rp 55.000</div></div>
+<div class="nominal-card" onclick="pilihNominal(this)">720 Diamond<div class="price">Rp 110.000</div></div>
+<div class="nominal-card" onclick="pilihNominal(this)">1450 Diamond<div class="price">Rp 220.000</div></div>
+</div>
+</div>
+
+<!-- FF MAX -->
+<div id="ffmax" class="section white-card">
+<h2>Free Fire MAX</h2>
+<div class="nominal-grid">
+<div class="nominal-card" onclick="pilihNominal(this)">50 Diamond<div class="price">Rp 10.000</div></div>
+<div class="nominal-card" onclick="pilihNominal(this)">70 Diamond<div class="price">Rp 13.000</div></div>
+<div class="nominal-card" onclick="pilihNominal(this)">140 Diamond<div class="price">Rp 22.000</div></div>
+<div class="nominal-card" onclick="pilihNominal(this)">355 Diamond<div class="price">Rp 55.000</div></div>
+<div class="nominal-card" onclick="pilihNominal(this)">720 Diamond<div class="price">Rp 110.000</div></div>
+<div class="nominal-card" onclick="pilihNominal(this)">1450 Diamond<div class="price">Rp 220.000</div></div>
+</div>
+</div>
+
+<!-- BLOOD -->
+<div id="blood" class="section white-card">
+<h2>Blood Strike</h2>
+<div class="nominal-grid">
+<div class="nominal-card" onclick="pilihNominal(this)">105 Gold<div class="price">Rp 16.000</div></div>
+<div class="nominal-card" onclick="pilihNominal(this)">320 Gold<div class="price">Rp 50.000</div></div>
+<div class="nominal-card" onclick="pilihNominal(this)">540 Gold<div class="price">Rp 75.000</div></div>
+<div class="nominal-card" onclick="pilihNominal(this)">1100 Gold<div class="price">Rp 160.000</div></div>
+</div>
+</div>
+
+<button onclick="kirimWA()">Hubungi Admin</button>
+
+</div>
+
+<script>
+document.getElementById("storeName").innerText=STORE_NAME;
+document.getElementById("logoStore").src=LOGO_STORE;
+document.getElementById("emailStore").innerText=EMAIL_STORE;
+
+let gameDipilih="";
+let nominalDipilih="";
+
+function pilihGame(id){
+document.querySelectorAll(".section").forEach(e=>e.classList.remove("active"));
+document.getElementById(id).classList.add("active");
+gameDipilih=id.toUpperCase();
+}
+
+function pilihNominal(el){
+document.querySelectorAll(".nominal-card").forEach(e=>e.classList.remove("active"));
+el.classList.add("active");
+nominalDipilih=el.innerText;
+}
+
+function kirimWA(){
+const id=document.getElementById("gameId").value;
+const zone=document.getElementById("zoneId").value;
+
+if(!gameDipilih||!nominalDipilih||!id){
+alert("Lengkapi data dulu ya!");
+return;
+}
+
+let text=`Halo Admin ${STORE_NAME}%0AGame: ${gameDipilih}%0AID: ${id}%0A`;
+if(zone) text+=`Zone: ${zone}%0A`;
+text+=`Nominal: ${nominalDipilih}`;
+
+window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${text}`);
+}
+</script>
+
+</body>
+</html>
